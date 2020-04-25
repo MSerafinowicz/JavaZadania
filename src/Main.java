@@ -1,3 +1,5 @@
+import devices.Car;
+
 public class Main {
 
     public static void main(String[] args)
@@ -15,11 +17,23 @@ public class Main {
         mouse.name = "Jerry";
 
         Car car = new Car("Ford", "Mustang", "2015",15000.0);
+        Car car2 = new Car("Ford", "Mustang", "2015",15000.0);
 
-        me.setSalary(3000.0);
-        me.getSalary();
+        //me.setSalary(3000.0);
 
-        me.setCar(car);
+        boolean isHashCodeEquals = car.hashCode() == car2.hashCode();
+        if (isHashCodeEquals == true)
+        {
+            System.out.println("Hashcodes are the same");
+        }
+        else
+        {
+            System.out.println("The id is different, that means objects are not equal");
+        }
+
+        System.out.println((car).equals(car2));
+
+        System.out.println(dog);
 
     }
 

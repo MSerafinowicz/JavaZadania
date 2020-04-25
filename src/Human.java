@@ -1,5 +1,9 @@
+import devices.Car;
+import devices.Phone;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
+import devices.Car;
 
 public class Human
 {
@@ -9,6 +13,11 @@ public class Human
     Animal pet;
     private Car car;
     private Double salary;
+
+    public String toString()
+    {
+        return firstName + " " + lastName;
+    }
 
     public Human()
     {
