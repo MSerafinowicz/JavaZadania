@@ -18,11 +18,8 @@ public class Main {
         me.car = car;
         System.out.println(me.car.model);
 
-
-        mouse.feed();
-        mouse.takeForAWalk();
-        mouse.takeForAWalk();
-        mouse.feed();
+        me.setSalary(3000.0);
+        me.getSalary();
     }
 
 }
