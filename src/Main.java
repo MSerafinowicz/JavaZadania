@@ -15,11 +15,12 @@ public class Main {
         mouse.name = "Jerry";
 
         Car car = new Car("Ford", "Mustang", "2015",15000.0);
-        me.car = car;
-        System.out.println(me.car.model);
 
         me.setSalary(3000.0);
         me.getSalary();
+
+        me.setCar(car);
+
     }
 
 }
