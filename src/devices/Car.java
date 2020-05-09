@@ -2,7 +2,7 @@ package devices;
 
 import java.util.Objects;
 
-public class Car
+public class Car extends Device
 {
     final String producer;
     final String model;
@@ -46,5 +46,10 @@ public class Car
     public String toString()
     {
         return producer + " " + model + " " + yearOfProduction + " " + value;
+    }
+
+    public void turnOn()
+    {
+        System.out.println("Device is turned on");
     }
 }

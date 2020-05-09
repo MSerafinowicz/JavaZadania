@@ -1,4 +1,5 @@
 import devices.Car;
+import devices.Phone;
 
 public class Main {
 
@@ -19,9 +20,11 @@ public class Main {
         Car car = new Car("Ford", "Mustang", "2015",15000.0);
         Car car2 = new Car("Ford", "Mustang", "2015",15000.0);
 
+        Phone phone = new Phone("Samsung", "GalaxyS73456382", "2020");
+
         //me.setSalary(3000.0);
 
-        boolean isHashCodeEquals = car.hashCode() == car2.hashCode();
+        /*boolean isHashCodeEquals = car.hashCode() == car2.hashCode();
         if (isHashCodeEquals == true)
         {
             System.out.println("Hashcodes are the same");
@@ -29,11 +32,12 @@ public class Main {
         else
         {
             System.out.println("The id is different, that means objects are not equal");
-        }
+        }*/
 
-        System.out.println((car).equals(car2));
-
-        System.out.println(dog);
+        car2.turnOn();
+        phone.turnOn();
+        System.out.println(car2.toString());
+        System.out.println(phone.toString());
 
     }
 
