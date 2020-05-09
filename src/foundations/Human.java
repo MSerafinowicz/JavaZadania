@@ -1,3 +1,5 @@
+package foundations;
+
 import devices.Car;
 import devices.Phone;
 
@@ -13,6 +15,7 @@ public class Human
     Animal pet;
     private Car car;
     private Double salary;
+    private Double cash=0.0;
 
     public String toString()
     {
@@ -28,6 +31,26 @@ public class Human
     {
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public Phone getPhone()
+    {
+        return phone;
+    }
+
+    public void setPhone(Phone phone)
+    {
+        Human.this.phone = phone;
+    }
+
+    public void setCash(Double cash)
+    {
+        this.cash = this.cash + cash;
+    }
+
+    public Double getCash()
+    {
+        return cash;
     }
 
     public Double getSalary()
@@ -59,6 +82,11 @@ public class Human
     }
 
     public void setCar(Car car)
+    {
+        Human.this.car = car;
+    }
+
+    public void buyCar(Car car)
     {
         if (salary > car.value)
         {

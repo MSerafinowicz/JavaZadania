@@ -1,6 +1,6 @@
 package devices;
-
-public abstract class Device
+import foundations.Sellable;
+public abstract class Device implements Sellable
 {
     String producer;
     String model;
