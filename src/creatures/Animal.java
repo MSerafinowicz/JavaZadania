@@ -1,15 +1,26 @@
-package foundations;
+package creatures;
 
 import foundations.Human;
+import foundations.Sellable;
 
-public class Animal implements Sellable
+public abstract class Animal implements Sellable, Feedable
 {
-    String name;
+    private String name;
     String species;
     private Double weight;
     static final Double DEAFULT_DOG_WEIGHT = 8.8;
 
-    public Animal(String species)
+    public String getName()
+    {
+        return this.name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public Animal(String name, String species, Double weight)
     {
         this.species = species;
         if(species =="dog")
@@ -26,7 +37,21 @@ public class Animal implements Sellable
         }
     }
 
-    void feed()
+    public void feed(Double foodWeight)
+    {
+        if(weight <= 0)
+        {
+            System.out.println("Your pet " +name +" is dead :(");
+        }
+        else
+        {
+            this.weight+=foodWeight;
+            System.out.println("Thanks for food, my weight is now "+weight);
+        }
+
+    }
+
+    public void feed()
     {
         if(weight <= 0)
         {
@@ -70,14 +95,14 @@ public class Animal implements Sellable
     @Override
     public void sell(Human seller, Human buyer, Double price)
     {
-        if(seller.pet != null)
+        if(seller.getPet() != null)
         {
             if (buyer.getCash() >= price)
             {
                 buyer.setCash(-price);
                 seller.setCash(price);
-                buyer.pet = this;
-                seller.pet = null;
+                buyer.setPet(this);
+                seller.setPet(null);
                 System.out.println(buyer.toString() + " bought " + this.toString() + " from " + seller.toString() + " for " + price + "$");
             }
             else

@@ -1,18 +1,18 @@
 package foundations;
 
+import creatures.Animal;
 import devices.Car;
 import devices.Phone;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import devices.Car;
 
 public class Human
 {
     String firstName;
     String lastName;
     Phone phone;
-    Animal pet;
+    private Animal pet;
     private Car car;
     private Double salary;
     private Double cash=0.0;
@@ -102,5 +102,13 @@ public class Human
         {
             System.out.println("Change your work, ask for rise, your salary is too low for that car");
         }
+    }
+
+    public Animal getPet() {
+        return pet;
+    }
+
+    public void setPet(Animal pet) {
+        this.pet = pet;
     }
 }
