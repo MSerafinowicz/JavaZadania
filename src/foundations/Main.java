@@ -3,6 +3,7 @@ package foundations;
 import creatures.Animal;
 import creatures.Pet;
 import devices.Car;
+import devices.Electric;
 import devices.Phone;
 
 public class Main {
@@ -19,12 +20,14 @@ public class Main {
 
         Animal mouse = new Pet ("Jerry", "mouse", 1.2);
 
-        Car car = new Car("Ford", "Mustang", "2015",15000.0);
-        Car car2 = new Car("Ford", "Mustang", "2015",15000.0);
+        Electric car = new Electric("Xiaomi","e1","2020", 100000.0);
 
         Phone phone = new Phone("Samsung", "GalaxyS73456382", "2020");
 
-        me.getPet().feed(1.2);
+        phone.installApp("facebook","Chrome","Archero","exam test answers","calculator");
+        System.out.println(phone.installedApps[3]);
+        phone.uninstallApp(3);
+        System.out.println(phone.installedApps[3]);
 
 
         /*boolean isHashCodeEquals = car.hashCode() == car2.hashCode();

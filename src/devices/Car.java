@@ -4,12 +4,14 @@ import foundations.Human;
 
 import java.util.Objects;
 
-public class Car extends Device
+public abstract class Car extends Device
 {
     final String producer;
     final String model;
     final String yearOfProduction;
     public Double value;
+    public Double resource = 30.0;
+    public Double capacityOfResource = 100.0;
 
     public Car(String producer, String model, String yearOfProduction)
     {
@@ -26,6 +28,8 @@ public class Car extends Device
         this.yearOfProduction = yearOfProduction;
         this.value = value;
     }
+
+    public abstract void refuel(double qunatity);
 
     @Override
     public boolean equals(Object o)
