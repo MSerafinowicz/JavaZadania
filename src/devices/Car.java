@@ -1,6 +1,10 @@
 package devices;
 
 import foundations.Human;
+
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public abstract class Car extends Device
@@ -11,6 +15,41 @@ public abstract class Car extends Device
     public Double value;
     public Double resource = 30.0;
     public Double capacityOfResource = 100.0;
+    public List<Human> ownersList = new ArrayList<Human>();
+    public List<TransactionsList> transactionsList = new ArrayList<TransactionsList>() {};
+
+    public boolean anyOwners()
+    {
+        boolean answer = false;
+        if (ownersList.get(0) != null)
+        {
+            answer = true;
+        }
+        return answer;
+    }
+
+    public String actualOwner()
+    {
+        Human owner = ownersList.get(ownersList.size() - 1);
+        return owner.toString();
+    }
+
+    public void sellDetails(Human seller, Human buyer)
+    {
+        for (TransactionsList transaction : transactionsList)
+        {
+            if (transaction.seller == seller && transaction.buyer == buyer)
+            {
+                System.out.println("This car was sold by " + seller + " for " + buyer + " for a price " + transaction.price + " " + transaction.date);
+            }
+            else System.out.println("This sale did not take place");
+        }
+    }
+
+    public Integer howManyOwners()
+    {
+        return transactionsList.size();
+    }
 
     public Car(String producer, String model, String yearOfProduction)
     {
@@ -63,19 +102,28 @@ public abstract class Car extends Device
         if (seller.getCar(garagePlace) == null)
         {
             throw new Exception("Seller hasn't this car");
-        }else if (buyer.isFreePlace() == false)
+        }else if (seller != ownersList.get(ownersList.size() - 1))
+        {
+            throw new Exception("This car might be stolen");
+        }
+        else if (buyer.isFreePlace() == false)
         {
             throw new Exception("Buyer hasn't place in garage");
-        }else if (buyer.getCash() < price)
+        }
+        else if (buyer.getCash() < price)
         {
             throw new Exception("Buyer hasn't got money");
-        }else
+        }
+        else
         {
             seller.removeCar(this);
             buyer.addCar(this);
+            this.ownersList.add(buyer);
             seller.setCash(seller.getCash() + price);
             buyer.setCash(buyer.getCash() - price);
+            this.transactionsList.add(new TransactionsList(seller,buyer,price));
             System.out.println("Transaction successful");
+
         }
         }
     }

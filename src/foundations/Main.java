@@ -27,11 +27,7 @@ public class Main {
 
         Phone phone = new Phone("Samsung", "GalaxyS73456382", "2020");
 
-        me.buyCar(car);
-        me.buyCar(car2);
-        System.out.println(me.getCash());
-        System.out.println(me.getCar(0));
-        System.out.println(me.carsValue());
+
 
 
         /*boolean isHashCodeEquals = car.hashCode() == car2.hashCode();
