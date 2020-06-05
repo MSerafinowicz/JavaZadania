@@ -6,6 +6,8 @@ import devices.Phone;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class Human
 {
@@ -13,24 +15,29 @@ public class Human
     String lastName;
     Phone phone;
     private Animal pet;
-    private Car car;
     private Double salary;
     private Double cash=0.0;
+    private static final Integer DEFAULT_GARAGE_SIZE = 3;
+
+    private Car [] garage;
 
     public String toString()
     {
         return firstName + " " + lastName;
     }
 
-    public Human()
+    public Human(String firstName, String lastName, Integer garageSize)
     {
-
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.garage = new Car [garageSize];
     }
 
     public Human(String firstName, String lastName)
     {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.garage = new Car[DEFAULT_GARAGE_SIZE];
     }
 
     public Phone getPhone()
@@ -76,27 +83,92 @@ public class Human
         }
     }
 
-    public Car getCar()
+    public Car getCar(Integer garagePlace)
     {
-        return car;
+        return this.garage[garagePlace];
     }
 
-    public void setCar(Car car)
+    public void setCar(Integer garagePlace, Car car)
     {
-        Human.this.car = car;
+        this.garage[garagePlace] = car;
     }
 
-    public void buyCar(Car car)
+    public Double carsValue()
     {
+        double value = 0.0;
+        for (Car index : garage)
+        {
+            if (index != null)
+            {
+                value += index.value;
+            }
+        }
+        return value;
+    }
+
+    public void garageSort(Comparator comparator)
+    {
+        Arrays.sort(this.garage, comparator);
+    }
+
+    public boolean isFreePlace()
+    {
+        boolean answer = false;
+        for (int index = 0; index < this.garage.length; index++)
+        {
+            if (this.garage[index] == null)
+            {
+                answer = true;
+            }
+        }
+        return answer;
+    }
+
+    public void removeCar(Car car)
+    {
+        for (int index = 0; index < this.garage.length; index++)
+        {
+            if (this.garage[index] == car)
+            {
+                this.garage[index] = null;
+            }
+        }
+    }
+
+    public void addCar(Car car) throws Exception {
+        if (isFreePlace() == true)
+        {
+            for (int index = 0; index < this.garage.length; index++)
+            {
+                if (this.garage[index] == null)
+                {
+                    this.garage[index] = car;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            throw new Exception("Garage is full");
+        }
+    }
+
+    public void buyCar(Car car) throws Exception {
         if (salary > car.value)
         {
-            System.out.println("The car was bought for cash.");
-            this.car = car;
+            if (isFreePlace())
+            {
+                addCar(car);
+                System.out.println("The car was bought for cash.");
+            }
         }
         else if (salary * 12 > car.value)
         {
-            System.out.println("The car was bought on credit");
-            this.car = car;
+            if (isFreePlace())
+            {
+                addCar(car);
+                System.out.println("The car was bought on credit");
+            }
         }
         else
         {

@@ -1,5 +1,7 @@
 package devices;
 
+import foundations.Human;
+
 public class Electric extends Car
 {
 
@@ -18,4 +20,8 @@ public class Electric extends Car
         else this.resource += quantity;
     }
 
+    @Override
+    public void sell(Human seller, Human buyer, Double price) {
+
+    }
 }

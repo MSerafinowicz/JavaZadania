@@ -1,7 +1,6 @@
 package devices;
 
 import foundations.Human;
-
 import java.util.Objects;
 
 public abstract class Car extends Device
@@ -59,27 +58,24 @@ public abstract class Car extends Device
         System.out.println("Device is turned on");
     }
 
-    @Override
-    public void sell(Human seller, Human buyer, Double price)
-    {
-        if(seller.getCar() != null)
+
+    public void sell(Human seller, Human buyer, Double price, Integer garagePlace) throws Exception {
+        if (seller.getCar(garagePlace) == null)
         {
-            if (buyer.getCash() >= price)
-            {
-                buyer.setCash(-price);
-                seller.setCash(price);
-                buyer.setCar(this);
-                seller.setCar(null);
-                System.out.println(buyer.toString() + " bought " + this.toString() + " from " + seller.toString() + " for " + price + "$");
-            }
-            else
-            {
-                System.out.println(buyer.toString() + " has not enough money");
-            }
+            throw new Exception("Seller hasn't this car");
+        }else if (buyer.isFreePlace() == false)
+        {
+            throw new Exception("Buyer hasn't place in garage");
+        }else if (buyer.getCash() < price)
+        {
+            throw new Exception("Buyer hasn't got money");
+        }else
+        {
+            seller.removeCar(this);
+            buyer.addCar(this);
+            seller.setCash(seller.getCash() + price);
+            buyer.setCash(buyer.getCash() - price);
+            System.out.println("Transaction successful");
         }
-        else
-        {
-            System.out.println(seller.toString() + " hasn't got any car to sell");
         }
     }
-}

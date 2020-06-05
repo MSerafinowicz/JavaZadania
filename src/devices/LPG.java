@@ -1,5 +1,7 @@
 package devices;
 
+import foundations.Human;
+
 public class LPG extends Car
 {
     public LPG(String producer, String model, String yearOfProduction, Double value) {
@@ -15,5 +17,11 @@ public class LPG extends Car
             this.resource = 100.0;
         }
         else this.resource += quantity;
+    }
+
+    @Override
+    public void sell(Human seller, Human buyer, Double price)
+    {
+
     }
 }

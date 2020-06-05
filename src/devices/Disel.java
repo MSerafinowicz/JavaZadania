@@ -1,5 +1,7 @@
 package devices;
 
+import foundations.Human;
+
 public class Disel extends Car
 {
     public Disel(String producer, String model, String yearOfProduction, Double value) {
@@ -15,5 +17,10 @@ public class Disel extends Car
             this.resource = 100.0;
         }
         else this.resource += quantity;
+    }
+
+    @Override
+    public void sell(Human seller, Human buyer, Double price) {
+
     }
 }
