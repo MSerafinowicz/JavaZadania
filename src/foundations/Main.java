@@ -2,10 +2,7 @@ package foundations;
 
 import creatures.Animal;
 import creatures.Pet;
-import devices.Car;
-import devices.Disel;
-import devices.Electric;
-import devices.Phone;
+import devices.*;
 
 public class Main {
 
@@ -15,8 +12,7 @@ public class Main {
         Animal lion = new Pet ("Alex", "lion", 50.0);
 
         Human me = new Human("Marcin", "Serafinowicz", 5);
-        me.setSalary(150000.0);
-        me.setPet(dog);
+        me.setCash(3000.0);
         Human friend = new Human("Adam" , "Małysz", 8);
 
         Animal mouse = new Pet ("Jerry", "mouse", 1.2);
@@ -25,7 +21,18 @@ public class Main {
 
         Disel car2 = new Disel("Fiat","Zadyma","1995",800.0);
 
-        Phone phone = new Phone("Samsung", "GalaxyS73456382", "2020");
+        Phone phone = new Phone("Producer","Model", "2018", me, 1200.0);
+
+        Application facebook = new Application("facebook",0.0,1.0);
+        Application archero = new Application("archero",0.0,3.8);
+        Application plagueInc = new Application("PlagueInc",70.0,2.3);
+        phone.installApp(facebook);
+        phone.installApp(plagueInc);
+        phone.installApp(archero);
+        phone.isInstalled("PlagueInc");
+        phone.freeApps();
+
+
 
 
 

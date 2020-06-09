@@ -1,36 +1,32 @@
 package devices;
+
 import foundations.Human;
+
+import java.util.*;
+
 
 public class Phone extends Device
 {
-    public String defaultAppServer = "jbzd.com.pl";
-    public String defaultAppProtocol = "ABCD";
-    public Double defaultAppVersion = 1.0;
-    public String [] installedApps = new String[5];
-    public void clearMobile()
+    private String defaultAppServer = "jbzd.com.pl";
+    private String defaultAppProtocol = "ABCD";
+    private Double defaultAppVersion = 1.0;
+    public List<Application> installedApps = new ArrayList<>(5);
+    private Human owner;
+    private Double price;
+
+    public Phone (String producer, String model, Double price)
     {
-        for (int i=0; i<installedApps.length; i++)
-        {
-            installedApps[i] = "empty";
-        }
+        this.producer = producer;
+        this.model = model;
+        this.price = price;
     }
 
-    public int installationDestination()
+    public Phone (String producer, String model, Double price, Human owner)
     {
-        int i,j;
-        for(i=0; i<installedApps.length; i++)
-        {
-            if(installedApps[i] == "empty")
-            {
-                break;
-            }
-        }
-        return i;
-    }
-
-    public void uninstallApp(int destionation)
-    {
-        installedApps[destionation] = "empty";
+        this.producer = producer;
+        this.model = model;
+        this.price = price;
+        this.owner = owner;
     }
 
     public Phone(String producer, String model, String yearOfProduction)
@@ -39,6 +35,127 @@ public class Phone extends Device
         this.model = model;
         this.yearOfProduction = yearOfProduction;
         clearMobile();
+    }
+
+    public Phone (String producer, String model, String yearOfProduction, Human owner)
+    {
+        this.producer = producer;
+        this.model = model;
+        this.yearOfProduction = yearOfProduction;
+        this.owner = owner;
+        clearMobile();
+    }
+
+    public Phone (String producer, String model, String yearOfProduction, Human owner, Double price)
+    {
+        this.producer = producer;
+        this.model = model;
+        this.yearOfProduction = yearOfProduction;
+        this.owner = owner;
+        this.price = price;
+        clearMobile();
+    }
+
+    public void clearMobile()
+    {
+        for (int i=0; i<installedApps.size(); i++)
+        {
+            installedApps.set(i,null);
+        }
+    }
+
+    public int installationDestination()
+    {
+        int i;
+        for(i=0; i<installedApps.size(); i++)
+        {
+            if(installedApps.get(i) == null)
+            {
+                break;
+            }
+        }
+        return i;
+    }
+
+    public void installApp(Application application)
+    {
+        if (owner.getCash() >= application.getPrice())
+        {
+            this.installedApps.add(installationDestination(),application);
+            owner.setCash(owner.getCash() - application.getPrice());
+            System.out.println("Installation successful, your cash balanace now is " +owner.getCash());
+        } else System.out.println("Not enough money");
+
+    }
+
+    public void uninstallApp(Application application)
+    {
+        for (int i=0; i<installedApps.size(); i++)
+        {
+            if (installedApps.get(i) == application)
+            {
+                installedApps.set(i,null);
+            }
+        }
+    }
+
+    public void freeApps()
+    {
+        for (Application application : installedApps)
+        {
+            try
+            {
+            if (application.getPrice() == 0.0)
+            {
+                System.out.println(application.getName());
+            }
+            } catch (NullPointerException e){};
+
+        }
+    }
+
+    public void isInstalled(Application application)
+    {
+        for (Application app : installedApps)
+        {
+            if (application == app)
+            {
+                System.out.println("This application is installed");
+            }
+        }
+    }
+
+    public void isInstalled(String appName)
+    {
+        for (Application app : installedApps)
+        {
+            if (appName == app.getName())
+            {
+                System.out.println("This application is installed");
+            }
+        }
+    }
+
+    public double priceOfCurrentApps()
+    {
+        double sum = 0;
+        try
+        {
+            for (Application app : installedApps) {
+                sum = sum + app.getPrice();
+            }
+        } catch (NullPointerException e){};
+        return sum;
+    }
+
+    public void appSortByPrice()
+    {
+        List<Application> sortedList = new ArrayList<>(installedApps);
+        sortedList.sort(new ComparatorByPrice());
+        for(Application app : sortedList)
+        {
+            System.out.println(app.getName() + " " + app.getPrice());
+        }
     }
 
     @Override
@@ -77,32 +194,11 @@ public class Phone extends Device
         }
     }
 
-
-    public void installApp(String appName)
-    {
-        this.installedApps[installationDestination()] = appName;
+    public Human getOwner() {
+        return owner;
     }
 
-    public void installApp(String appName, Double version)
-    {
-        this.installedApps[installationDestination()] = appName;
-        this.defaultAppVersion = version;
+    public void setOwner(Human owner) {
+        this.owner = owner;
     }
-
-    public void installApp(String appName, Double version, String appServer)
-    {
-        this.installedApps[installationDestination()] = appName;
-        this.defaultAppVersion = version;
-        this.defaultAppServer = appServer;
-    }
-
-    public void installApp(String appName1, String appName2, String appName3, String appName4, String appName5)
-    {
-        this.installedApps[installationDestination()] = appName1;
-        this.installedApps[installationDestination()] = appName2;
-        this.installedApps[installationDestination()] = appName3;
-        this.installedApps[installationDestination()] = appName4;
-        this.installedApps[installationDestination()] = appName5;
-    }
-
 }

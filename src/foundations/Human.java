@@ -52,7 +52,12 @@ public class Human
 
     public void setCash(Double cash)
     {
-        this.cash = this.cash + cash;
+        this.cash = cash;
+    }
+
+    public void addCash(Double cash)
+    {
+        this.cash = this.getCash() + cash;
     }
 
     public Double getCash()
